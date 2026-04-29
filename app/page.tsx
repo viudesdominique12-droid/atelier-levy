@@ -1,101 +1,86 @@
-import Image from "next/image";
+'use client'
+
+import { useEffect } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Lenis from 'lenis'
+
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
+import ChapterIndex from '@/components/ui/ChapterIndex'
+import WatchBackground from '@/components/WatchBackground'
+
+// Note : les fichiers ont gardé leur nom d'origine, mais l'ordre narratif a changé.
+//   ActOne_Instant.tsx           → Acte I — Le silence
+//   ActThree_Matiere.tsx         → Acte II — Le démontage
+//   ActTwo_Geste.tsx             → Acte III — Le geste
+//   ActFour_Citation.tsx         → Acte IV — Le retour à la vie
+//   ActFive_Mandelieu.tsx        → Acte V — Le territoire
+//   ActSix_Invitation.tsx        → Acte VI — L'invitation
+import ActOneSilence from '@/components/acts/ActOne_Instant'
+import ActTwoDemontage from '@/components/acts/ActThree_Matiere'
+import ActThreeGeste from '@/components/acts/ActTwo_Geste'
+import ActServices from '@/components/acts/ActServices'
+import ActFourRetour from '@/components/acts/ActFour_Citation'
+import ActFiveTerritoire from '@/components/acts/ActFive_Mandelieu'
+import ActSixInvitation from '@/components/acts/ActSix_Invitation'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    let lenis: Lenis | null = null
+    let tickerHandler: ((time: number) => void) | null = null
+
+    if (!reduced) {
+      lenis = new Lenis({
+        // Calibrage trackpad-friendly : durée courte + lerp léger pour ne pas
+        // empiler trop d'inertie sur celle native du trackpad. La molette de
+        // souris reste fluide grâce au wheelMultiplier conservateur.
+        duration: 0.9,
+        lerp: 0.12,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        wheelMultiplier: 1,
+        touchMultiplier: 1.4,
+        syncTouch: true,
+      })
+      lenis.on('scroll', ScrollTrigger.update)
+      tickerHandler = (time: number) => lenis!.raf(time * 1000)
+      gsap.ticker.add(tickerHandler)
+      gsap.ticker.lagSmoothing(0)
+    }
+
+    const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 250)
+
+    return () => {
+      window.clearTimeout(refreshTimer)
+      if (tickerHandler) gsap.ticker.remove(tickerHandler)
+      lenis?.destroy()
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+    }
+  }, [])
+
+  return (
+    <>
+      <WatchBackground />
+      <Navigation />
+      <ChapterIndex />
+
+      <main className="relative z-[2]">
+        <ActOneSilence />
+        <ActTwoDemontage />
+        <ActThreeGeste />
+        <ActServices />
+        <ActFourRetour />
+        <ActFiveTerritoire />
+        <ActSixInvitation />
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+      <Footer />
+    </>
+  )
 }

@@ -2,26 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html {
+    color-scheme: dark;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Lenis smooth scroll : neutralise scroll-behavior natif */
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  /* Sélection laiton */
+  ::selection {
+    background: #d4b67740;
+    color: #f0e6d2;
+  }
+
+  /* Focus state laiton sur tout élément clavier */
+  *:focus-visible {
+    outline: 2px solid #d4b677;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* Grain film discret 4 % en overlay multiply pour patine cinéma */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+  }
+
+  /* Halo bleu nuit profond depuis le haut + chaleur laiton ponctuelle —
+     donne un fond « noir bleuté » sans aplat. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -5%, rgba(28, 56, 110, 0.55), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 80% 35%, rgba(15, 30, 70, 0.35), transparent 60%),
+      radial-gradient(ellipse 50% 30% at 50% 105%, rgba(201, 165, 91, 0.05), transparent 55%);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Spotlight radial sombre derrière les titres centraux —
+     se substitue à un panneau opaque pour préserver l'intégration
+     de la vidéo de fond. Génère une zone ombrée locale sur 60vw. */
+  .text-spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .text-spotlight::before {
+    content: '';
+    position: absolute;
+    inset: -40% -20%;
+    z-index: -1;
+    background: radial-gradient(
+      ellipse closest-side at center,
+      rgba(2, 3, 10, 0.78) 0%,
+      rgba(2, 3, 10, 0.55) 35%,
+      rgba(2, 3, 10, 0.2) 70%,
+      transparent 95%
+    );
+    pointer-events: none;
+  }
+
+  /* Ombre douce sur tous les titres affichés en serif —
+     ajoute la dernière marge de contraste sans toucher au glyphe. */
+  .font-display {
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.5),
+      0 2px 12px rgba(0, 0, 0, 0.55),
+      0 0 28px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Texte qui se révèle masqué par le bas — pour les SplitText manuels */
+  .clip-mask {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .clip-mask.is-revealed {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* Fine ligne d'épaisseur d'un cheveu sur fond bleu */
+  .hairline {
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(212, 182, 119, 0.5),
+      transparent
+    );
+    height: 1px;
+  }
+
+  /* prefers-reduced-motion : neutralise les transformations clés */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
