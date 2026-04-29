@@ -26,7 +26,10 @@ const EASE = 0.1
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 const FRAME_PATH = (i: number) =>
   `${BASE_PATH}/watch-frames/frame_${String(i).padStart(4, '0')}.jpg`
-const VIDEO_PATH = `${BASE_PATH}/watch.mp4`
+// Version desktop : 1928×1072, 40 MB. Réservée au path desktop si jamais
+// utilisée. Pour le path mobile on charge la version 720p ~3,7 MB qui
+// démarre quasi instantanément même sur 4G.
+const VIDEO_PATH_MOBILE = `${BASE_PATH}/watch-mobile.mp4`
 const POSTER_PATH = `${BASE_PATH}/watch-frames/frame_0001.jpg`
 
 function detectMobileMode(): boolean {
@@ -235,22 +238,29 @@ export default function WatchBackground() {
           />
         )}
         {isMobile === true && (
-          <video
-            ref={videoRef}
-            className="h-full w-full object-cover"
+          // Wrapper Ken Burns : zoom + pan continu en CSS. Garantit qu'il
+          // y a TOUJOURS du mouvement, même avant que la vidéo ne démarre
+          // (sur 4G, 1-2s de buffering) et même si Safari bloque autoplay.
+          <div
+            className="ken-burns h-full w-full"
             style={{ filter: 'brightness(0.55) saturate(1.05)' }}
-            src={VIDEO_PATH}
-            poster={POSTER_PATH}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-          />
+          >
+            <video
+              ref={videoRef}
+              className="h-full w-full object-cover"
+              src={VIDEO_PATH_MOBILE}
+              poster={POSTER_PATH}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+            />
+          </div>
         )}
         {isMobile === null && (
           <div
-            className="h-full w-full bg-cover bg-center"
+            className="ken-burns h-full w-full bg-cover bg-center"
             style={{
               backgroundImage: `url('${POSTER_PATH}')`,
               filter: 'brightness(0.55) saturate(1.05)',
