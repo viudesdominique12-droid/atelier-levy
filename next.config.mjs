@@ -3,8 +3,10 @@
 // GitHub Pages sert le site à https://<user>.github.io/<repo>/.
 // Il faut donc préfixer toutes les URL d'assets par /<repo>. En dev local
 // le préfixe est vide pour que tout marche directement sur localhost:3002.
+// NB : le dossier local s'appelle « parker » mais le repo GitHub est resté
+// `atelier-levy` — c'est ce nom qui détermine le basePath en prod.
 const isProd = process.env.NODE_ENV === 'production'
-const repoName = 'parker'
+const repoName = 'atelier-levy'
 const basePath = isProd ? `/${repoName}` : ''
 
 const nextConfig = {
