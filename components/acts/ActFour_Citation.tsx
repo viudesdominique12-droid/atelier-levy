@@ -1,21 +1,18 @@
 'use client'
 
 /**
- * Acte IV — Le retour à la vie. Climax de l'arc narratif.
+ * Acte IV — Le verdict. Climax de l'arc narratif.
  *
- * Refonte : plus de pinned 250vh, plus de scroll-trap. Le scroll global est
- * piloté par la montre en fond (WatchBackground), donc on laisse la page
- * défiler naturellement façon Apple. Trois temps : Tic. → Tic. Tac. → Elle
- * bat à nouveau. Chaque temps occupe son propre écran, fade-in à l'entrée,
- * fade-out à la sortie. Le point laiton pulse de plus en plus vite à mesure
- * que l'utilisateur descend dans la section. Compteur de battements en bas.
+ * Trois temps : Tic. → Tac. → Authentique. Le point laiton pulse de plus
+ * en plus vite à mesure que l'utilisateur descend dans la section. Compteur
+ * de battements depuis le début de l'examen.
  */
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const BEATS = ['Tic.', 'Tic. Tac.', 'Elle bat à nouveau.']
+const BEATS = ['Tic.', 'Tac.', 'Authentique.']
 
 export default function ActFourRetour() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -94,12 +91,12 @@ export default function ActFourRetour() {
       ref={sectionRef}
       data-act="4"
       className="relative"
-      aria-label="Acte IV — Le retour à la vie"
+      aria-label="Acte IV — Le verdict"
     >
       {/* Étiquette verticale du chapitre */}
       <div className="pointer-events-none absolute left-[clamp(20px,5vw,80px)] top-[20vh] -rotate-90 origin-top-left">
         <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-text-dim whitespace-nowrap">
-          Acte IV — Le retour à la vie
+          Acte IV — Le verdict
         </span>
       </div>
 
@@ -134,7 +131,7 @@ export default function ActFourRetour() {
           <span ref={counterRef} className="text-brass">
             0
           </span>{' '}
-          battements depuis le réveil
+          battements vérifiés
         </p>
       </div>
     </section>

@@ -10,3 +10,9 @@ next-env.d.ts
 /coverage
 /build
 /out
+
+# Local Claude Code config (per-user)
+.claude/
+
+# Source extraction data — heavy reference material, not needed at runtime
+parker-smith-extraction/

@@ -12,11 +12,11 @@ import { cn } from '@/lib/cn'
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI']
 const LABELS = [
-  'Le silence',
-  'Le démontage',
-  'Le geste',
-  'Le retour',
-  'Le territoire',
+  "L'arrivée",
+  "L'examen",
+  'La signature',
+  'Le verdict',
+  'La promesse',
   "L'invitation",
 ]
 

@@ -1,12 +1,10 @@
 'use client'
 
 /**
- * Acte I — Le silence.
+ * Acte I — L'arrivée.
  *
- * Refonte : plus de pinned 350vh, plus de scroll-trap. Le scroll global est
- * désormais piloté par la montre en fond (WatchBackground), donc on laisse
- * la page défiler naturellement façon Apple. Les phrases apparaissent l'une
- * après l'autre par fondu enchaîné — chaque ligne occupe son propre écran.
+ * Une montre passe entre nos mains. Avant l'envie d'acheter, avant le prix,
+ * avant le geste — on regarde. C'est l'ouverture du récit Parker & Smith.
  */
 
 import { useEffect, useRef } from 'react'
@@ -14,9 +12,9 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const LINES = [
-  'Quelque part,',
-  "une montre s'est arrêtée.",
-  'Et puis : silence.',
+  'Une montre,',
+  'qui a déjà vécu.',
+  "Avant tout — on regarde.",
 ]
 
 export default function ActOneSilence() {
@@ -85,12 +83,12 @@ export default function ActOneSilence() {
       ref={sectionRef}
       data-act="1"
       className="relative"
-      aria-label="Acte I — Le silence"
+      aria-label="Acte I — L'arrivée"
     >
       {/* Étiquette verticale du chapitre, fixée à l'entrée de l'acte */}
       <div className="pointer-events-none absolute left-[clamp(20px,5vw,80px)] top-[20vh] -rotate-90 origin-top-left">
         <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-text-dim whitespace-nowrap">
-          Acte I — Le silence
+          Acte I — L&apos;arrivée
         </span>
       </div>
 

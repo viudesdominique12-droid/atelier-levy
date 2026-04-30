@@ -2,11 +2,12 @@
 
 /**
  * Acte VI — L'invitation.
- * Plein écran. Phrase géante centrée. CTA magnétique laiton. Coordonnées
- * (téléphone + email) en placeholder, marquees en mono.
+ * Plein écran. Phrase géante centrée. CTA principal vers le catalogue,
+ * trois portes secondaires : bijoux, vendre, contact.
  */
 
 import { useEffect, useRef } from 'react'
+import Link from 'next/link'
 import gsap from 'gsap'
 import MagneticButton from '@/components/ui/MagneticButton'
 
@@ -47,7 +48,7 @@ export default function ActSixInvitation() {
     return () => ctx.revert()
   }, [])
 
-  const titleWords = ['Confiez-nous', 'votre', 'montre.']
+  const titleWords = ['Venez', 'nous', 'rencontrer.']
 
   return (
     <section
@@ -84,33 +85,37 @@ export default function ActSixInvitation() {
       </h2>
 
       <div ref={ctaRef} className="mt-16">
-        <MagneticButton href="/contact">Prendre rendez-vous</MagneticButton>
+        <MagneticButton href="/montres">Voir le catalogue</MagneticButton>
       </div>
 
       <div
         ref={metaRef}
-        className="text-spotlight mt-20 grid grid-cols-1 gap-10 px-10 py-8 text-center font-mono text-[11px] uppercase tracking-[0.32em] text-text-muted md:grid-cols-3"
+        className="text-spotlight mt-20 grid grid-cols-1 gap-8 px-10 py-8 text-center font-mono text-[11px] uppercase tracking-[0.32em] text-text-muted md:grid-cols-3"
       >
-        <div>
-          <p className="text-text-dim">Téléphone</p>
-          {/* TODO CLIENT : numéro réel */}
-          <a href="tel:+33XXXXXXXXX" className="mt-2 block text-text hover:text-brass">
-            +33 X XX XX XX XX
-          </a>
-        </div>
-        <div>
-          <p className="text-text-dim">Email</p>
-          <a
-            href="mailto:contact@parkeretsmith.com"
-            className="mt-2 block text-text hover:text-brass normal-case tracking-normal"
-          >
-            contact@parkeretsmith.com
-          </a>
-        </div>
-        <div>
-          <p className="text-text-dim">Atelier</p>
-          <p className="mt-2 text-text">Mandelieu-la-Napoule</p>
-        </div>
+        <Link href="/bijoux" className="group block">
+          <p className="text-text-dim transition-colors group-hover:text-brass">
+            Joaillerie
+          </p>
+          <p className="mt-2 text-text transition-colors group-hover:text-brass">
+            Voir les bijoux
+          </p>
+        </Link>
+        <Link href="/vendre-sa-montre" className="group block">
+          <p className="text-text-dim transition-colors group-hover:text-brass">
+            Vendre
+          </p>
+          <p className="mt-2 text-text transition-colors group-hover:text-brass">
+            Faire estimer ma montre
+          </p>
+        </Link>
+        <Link href="/contact" className="group block">
+          <p className="text-text-dim transition-colors group-hover:text-brass">
+            Contact
+          </p>
+          <p className="mt-2 text-text transition-colors group-hover:text-brass">
+            Nous écrire
+          </p>
+        </Link>
       </div>
     </section>
   )

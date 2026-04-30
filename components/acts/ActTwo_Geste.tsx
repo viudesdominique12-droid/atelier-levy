@@ -1,24 +1,24 @@
 'use client'
 
 /**
- * Acte III — Le geste.
+ * Acte III — La signature.
  * Asymétrique. Titre serif géant + liste verbale stagger + citation centrale
- * + signature. Plus contemplatif, plus de respiration.
+ * + signature. La séquence d'authentification dans la voix de Parker & Smith.
  */
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 const VERBS = [
-  'Démonter.',
-  'Nettoyer.',
-  'Polir.',
-  'Réajuster.',
-  'Remonter.',
-  'Régler.',
+  'Confronter.',
+  'Tracer.',
+  'Dater.',
+  'Authentifier.',
+  'Certifier.',
+  'Garantir.',
 ]
 
-const QUOTE = 'Une montre ne meurt jamais. Elle se tait.'
+const QUOTE = 'Les références et les numéros de série ne mentent jamais.'
 
 export default function ActThreeGeste() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -65,7 +65,7 @@ export default function ActThreeGeste() {
     return () => ctx.revert()
   }, [])
 
-  const titleWords = ['Le', 'geste', 'appartient', 'au', 'temps.']
+  const titleWords = ['La', 'signature', 'tient', 'aux', 'numéros.']
   const quoteWords = QUOTE.split(' ')
 
   return (
@@ -73,7 +73,7 @@ export default function ActThreeGeste() {
       ref={sectionRef}
       data-act="3"
       className="relative px-[clamp(20px,5vw,80px)] py-[24vh]"
-      aria-label="Acte III — Le geste"
+      aria-label="Acte III — La signature"
     >
       <div className="text-spotlight mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 py-16 md:grid-cols-12 md:gap-24 md:px-12">
         {/* Colonne gauche : tag + titre */}
@@ -84,7 +84,7 @@ export default function ActThreeGeste() {
             </span>
             <span className="h-px w-12 bg-brass/40" />
             <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-text-muted">
-              Le geste
+              La signature
             </span>
           </div>
 

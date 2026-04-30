@@ -27,9 +27,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://parkeretsmith.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Parker & Smith — Horloger à Mandelieu-la-Napoule",
+  title: "Parker & Smith — Expertise et conseil en montres de luxe",
   description:
-    "Restauration de montres mécaniques anciennes. Côte d'Azur. 4.8★ sur 102 avis Google.",
+    "Spécialistes du marché de la montre d'occasion. Authentification, certification et garantie 2 ans sur chaque pièce. Montres contemporaines, vintages d'exception et bijoux signés.",
   robots: 'index, follow',
   alternates: { canonical: '/' },
   openGraph: {

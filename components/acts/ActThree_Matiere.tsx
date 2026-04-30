@@ -1,9 +1,10 @@
 'use client'
 
 /**
- * Acte II — Le démontage.
- * Filmstrip horizontal scrub : carton d'intro puis 5 pièces de montre,
- * chacune avec un petit dessin SVG, son nom serif, une note poétique.
+ * Acte II — L'examen.
+ * Filmstrip horizontal scrub : carton d'intro puis 5 points d'authentification,
+ * chacun illustré par un dessin SVG. Reformulé pour le métier d'expert
+ * Parker & Smith — pas un atelier de restauration, mais un œil qui authentifie.
  */
 
 import { useEffect, useRef, type ReactNode } from 'react'
@@ -21,9 +22,9 @@ type Piece = {
 const PIECES: Piece[] = [
   {
     num: '01',
-    name: 'PIGNON',
-    fr: 'Le pignon',
-    poem: 'Six dents pour transmettre une impulsion entière.',
+    name: 'BOÎTIER',
+    fr: 'Le boîtier',
+    poem: 'Numéro de série, finitions, gravures — la première lecture.',
     draw: (
       <svg viewBox="0 0 100 100" fill="none" stroke="#C9A55B" strokeWidth="0.6">
         <circle cx="50" cy="50" r="22" />
@@ -41,9 +42,9 @@ const PIECES: Piece[] = [
   },
   {
     num: '02',
-    name: 'ÉCHAPPEMENT',
-    fr: "L'échappement",
-    poem: 'Le cœur qui dose le temps, dent après dent.',
+    name: 'MOUVEMENT',
+    fr: 'Le mouvement',
+    poem: 'On l’ouvre. Le calibre doit correspondre au boîtier.',
     draw: (
       <svg viewBox="0 0 100 100" fill="none" stroke="#C9A55B" strokeWidth="0.6">
         <circle cx="50" cy="50" r="20" />
@@ -61,9 +62,9 @@ const PIECES: Piece[] = [
   },
   {
     num: '03',
-    name: 'BALANCIER',
-    fr: 'Le balancier',
-    poem: 'Vingt-huit mille battements par jour. Inlassable.',
+    name: 'AIGUILLES',
+    fr: 'Les aiguilles',
+    poem: 'Forme, finition, position. Chaque détail trahit l’âge.',
     draw: (
       <svg viewBox="0 0 100 100" fill="none" stroke="#C9A55B" strokeWidth="0.6">
         <circle cx="50" cy="50" r="32" />
@@ -75,9 +76,9 @@ const PIECES: Piece[] = [
   },
   {
     num: '04',
-    name: 'SPIRAL',
-    fr: 'Le ressort spiral',
-    poem: "L'âme du mouvement. Lovée, tendue, libérée.",
+    name: 'PÉRIPHÉRIQUES',
+    fr: 'Boucle & couronne',
+    poem: 'Boucles, tiges couronne, fermoirs. Souvent les plus parlants.',
     draw: (
       <svg viewBox="0 0 100 100" fill="none" stroke="#C9A55B" strokeWidth="0.6">
         <path d="M 50 50 m -2 0 a 2 2 0 1 1 4 0 a 4 4 0 1 1 -8 0 a 6 6 0 1 1 12 0 a 8 8 0 1 1 -16 0 a 10 10 0 1 1 20 0 a 12 12 0 1 1 -24 0 a 14 14 0 1 1 28 0 a 16 16 0 1 1 -32 0 a 18 18 0 1 1 36 0 a 20 20 0 1 1 -40 0 a 22 22 0 1 1 44 0" />
@@ -86,9 +87,9 @@ const PIECES: Piece[] = [
   },
   {
     num: '05',
-    name: 'RUBIS',
-    fr: 'Les rubis',
-    poem: "Quinze gouttes de feu pour quinze pivots — nul frottement.",
+    name: 'RÉFÉRENCES',
+    fr: 'Les numéros',
+    poem: 'Référence et numéro de série. Ils datent. Ils prouvent.',
     draw: (
       <svg viewBox="0 0 100 100" fill="none">
         <path d="M50 22 L72 50 L50 78 L28 50 Z" fill="#8B2230" stroke="#C9A55B" strokeWidth="0.5" />
@@ -142,7 +143,7 @@ export default function ActTwoDemontage() {
       ref={sectionRef}
       data-act="2"
       className="relative h-screen w-full overflow-hidden"
-      aria-label="Acte II — Le démontage"
+      aria-label="Acte II — L'examen"
     >
       {/* Tag haut gauche */}
       <div className="absolute left-[clamp(20px,5vw,80px)] top-[8vh] z-10 flex items-center gap-4">
@@ -151,7 +152,7 @@ export default function ActTwoDemontage() {
         </span>
         <span className="h-px w-12 bg-brass/40" />
         <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-text-muted">
-          Le démontage
+          L&apos;examen
         </span>
       </div>
 
@@ -171,15 +172,15 @@ export default function ActTwoDemontage() {
         {/* Carton d'intro */}
         <article className="text-spotlight relative mr-[10vw] flex w-[78vw] shrink-0 flex-col justify-center px-8 py-10 md:w-[55vw]">
           <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-brass">
-            Pièce par pièce
+            L&apos;authentification
           </p>
           <h2 className="mt-8 font-display text-massive font-normal leading-[0.95] tracking-tightest text-text">
-            On l&apos;ouvre.
+            On vérifie.
           </h2>
           <p className="mt-8 max-w-md font-display text-xl italic leading-snug text-text-muted md:text-2xl">
-            Cinq pièces, cinq fonctions, cinq dialogues entre l&apos;atelier
-            et l&apos;horloger d&apos;origine. Chaque démontage est un acte
-            de respect.
+            Cinq points qui ne mentent pas. Le boîtier, son mouvement,
+            la correspondance de l&apos;un avec l&apos;autre, et tous les
+            éléments périphériques.
           </p>
           <p className="mt-12 font-mono text-[10px] uppercase tracking-[0.32em] text-text-dim">
             Continuez à scroller →

@@ -3,13 +3,11 @@
 /**
  * Interlude — Le savoir-faire.
  *
- * Section concrète insérée entre Acte III (le geste abstrait) et Acte IV
- * (la vie revient). Pas de numéro d'acte : ne disrupte pas l'arc narratif,
- * n'apparaît pas dans le ChapterIndex. Sa fonction : le visiteur qui scroll
- * doit savoir, sans aucune ambiguïté, ce que cet atelier fait pour lui.
- *
- * Trois blocs concrets, chacun en spotlight pour rester lisible sur le fond
- * vidéo : services, processus, signaux de confiance.
+ * Section concrète insérée entre Acte III (la signature) et Acte IV
+ * (le verdict). Pas de numéro d'acte : ne disrupte pas l'arc narratif,
+ * n'apparaît pas dans le ChapterIndex. Sa fonction : dire en clair ce que
+ * Parker & Smith fait pour le client — pas un atelier de restauration,
+ * mais un expert qui sécurise l'achat et la revente d'une montre de luxe.
  */
 
 import { useEffect, useRef } from 'react'
@@ -18,49 +16,49 @@ import gsap from 'gsap'
 const SERVICES = [
   {
     num: '01',
-    name: 'Révision complète',
-    body: 'Démontage intégral du mouvement, nettoyage par bain ultrasons, lubrification au point, remontage et réglage 5 positions.',
+    name: 'Authentification',
+    body: "Vérification du boîtier, du mouvement et de leur correspondance. Contrôle des éléments périphériques : aiguilles, boucles, tiges couronne. Croisement des références et numéros de série.",
   },
   {
     num: '02',
-    name: 'Réparation mécanique',
-    body: "Pivots, ressort moteur, échappement, balancier — les pannes structurelles d'un mouvement mécanique ou automatique.",
+    name: 'Garantie 2 ans',
+    body: "Toutes nos montres bénéficient d'une garantie d'origine ou d'une garantie de 2 années fournie par Parker & Smith. Sans condition cachée.",
   },
   {
     num: '03',
-    name: 'Restauration & polissage',
-    body: 'Polissage du boîtier et du bracelet acier ou or, traitement des montres vintages dans le respect de leur patine.',
+    name: 'Atelier intégré',
+    body: "Bon fonctionnement contrôlé par notre atelier horloger interne, ou retour dans les ateliers des marques. Aucune pièce ne quitte la maison sans cette étape.",
   },
   {
     num: '04',
-    name: 'Étanchéité & quartz',
-    body: 'Test de pression, changement de joints, intervention sur calibres quartz, changement de pile garanti étanche.',
+    name: 'Bracelets neufs',
+    body: "Lorsque les bracelets d'origine ne répondent pas à nos critères d'exigence, nous les remplaçons par des modèles neufs. Aucune approximation tolérée.",
   },
 ]
 
 const STEPS = [
   {
     num: '01',
-    title: 'Vous apportez la montre',
-    body: "À l'atelier de Mandelieu, sans rendez-vous. Un café, un échange, une première lecture du mouvement.",
+    title: 'Vous nous présentez la pièce',
+    body: "Vous cherchez à acheter ou à vendre. Photos, papiers, écrin si vous les avez. Plus le dossier est complet, plus la lecture est précise.",
   },
   {
     num: '02',
-    title: 'Estimation sous 7 jours',
-    body: 'Diagnostic complet, devis détaillé pièce par pièce. Aucun engagement tant que vous n\'avez pas validé.',
+    title: 'Nous expertisons',
+    body: "Authentification rigoureuse, vérification du fonctionnement, confrontation des numéros. Aucun engagement tant que vous n'avez pas validé.",
   },
   {
     num: '03',
-    title: 'Restauration en atelier',
-    body: 'Travail sur établi, garantie 24 mois sur la révision et 12 mois sur les pièces remplacées.',
+    title: 'Vous repartez tranquille',
+    body: 'Garantie 2 ans en main, traçabilité complète, transaction limpide. Acheter en confiance, vendre en sérénité.',
   },
 ]
 
 const TRUST = [
-  '30 ans de pratique',
-  'Tous mouvements',
-  'Vintage à contemporain',
-  'Garantie 24 mois',
+  'Aucune marque représentée',
+  'Spécialistes occasion',
+  'Vintage et contemporain',
+  'Garantie 2 ans',
 ]
 
 export default function ActServices() {
@@ -101,7 +99,7 @@ export default function ActServices() {
     return () => ctx.revert()
   }, [])
 
-  const titleWords = ['Ce', 'que', 'nous', 'faisons.']
+  const titleWords = ['Ce', 'que', 'nous', 'garantissons.']
 
   return (
     <section
@@ -119,7 +117,7 @@ export default function ActServices() {
             </span>
             <span className="h-px w-12 bg-brass/40" />
             <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-text-muted">
-              Parker &amp; Smith · Mandelieu
+              Parker &amp; Smith · Expertise & conseil
             </span>
           </div>
 
@@ -140,8 +138,9 @@ export default function ActServices() {
           </h2>
 
           <p className="mt-8 max-w-xl font-display text-xl italic leading-snug text-text-muted md:text-2xl">
-            Quatre métiers sous un même établi, pour redonner vie aux montres
-            mécaniques, automatiques, quartz, vintages ou contemporaines.
+            Parker &amp; Smith n&apos;est ni agent, ni représentant, ni
+            concessionnaire officiel. Notre métier — l&apos;expertise et le
+            conseil en montres et bijoux de luxe.
           </p>
         </div>
 
@@ -175,7 +174,7 @@ export default function ActServices() {
               Le processus
             </span>
             <p className="mt-6 font-display text-3xl font-normal italic leading-snug text-text md:text-4xl">
-              De la première poignée de main à la montre rendue.
+              De la première poignée de main à la pièce qui change de main.
             </p>
           </div>
 
