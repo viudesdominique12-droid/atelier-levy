@@ -1,4 +1,4 @@
-# Atelier d'horlogerie R. Levy — Site vitrine premium
+# Parker & Smith — Site vitrine premium
 
 Site Next.js 14 avec React Three Fiber, palette territoriale Côte d'Azur, deux scènes 3D (calibre mécanique + baie de Cannes) et formulaire contact via Resend.
 
@@ -36,7 +36,7 @@ Depuis le dossier `parker/` :
 ```bash
 git init
 git add .
-git commit -m "Initial commit — Site Atelier R. Levy"
+git commit -m "Initial commit — Site Parker & Smith"
 git branch -M main
 git remote add origin https://github.com/[USERNAME]/parker.git
 git push -u origin main
@@ -50,8 +50,8 @@ git push -u origin main
 4. Build Command : `next build` (par défaut)
 5. **Variables d'environnement** à ajouter :
    - `RESEND_API_KEY` — clé API Resend
-   - `RESEND_RECIPIENT_EMAIL` — ex. `contact@atelier-levy.fr`
-   - `NEXT_PUBLIC_SITE_URL` — ex. `https://atelier-levy.fr`
+   - `RESEND_RECIPIENT_EMAIL` — ex. `contact@parkeretsmith.com`
+   - `NEXT_PUBLIC_SITE_URL` — ex. `https://parkeretsmith.com`
 6. **Deploy**
 
 ### 3. Configurer Resend (formulaire contact)
@@ -59,16 +59,16 @@ git push -u origin main
 1. Créer un compte sur [resend.com](https://resend.com) (gratuit jusqu'à 100 emails/jour)
 2. Dashboard → **API Keys** → Create API Key → coller dans Vercel
 3. **Vérifier le domaine** :
-   - Resend → Domains → Add Domain → `atelier-levy.fr`
+   - Resend → Domains → Add Domain → `parkeretsmith.com`
    - Ajouter les records DNS (DKIM, SPF, DMARC) chez le registrar
    - Attendre validation (24-48h)
 4. Remplacer le sender dans [`app/api/contact/route.ts`](app/api/contact/route.ts) :
-   `onboarding@resend.dev` → `contact@atelier-levy.fr`
+   `onboarding@resend.dev` → `contact@parkeretsmith.com`
 5. Tester l'envoi depuis `/contact` après déploiement
 
 ### 4. Nom de domaine custom
 
-1. Vercel → Project Settings → **Domains** → Add Domain → `atelier-levy.fr`
+1. Vercel → Project Settings → **Domains** → Add Domain → `parkeretsmith.com`
 2. Vercel donne les DNS records à créer :
    - Type **A** : `76.76.21.21`
    - ou **CNAME** : `cname.vercel-dns.com`
@@ -79,7 +79,7 @@ git push -u origin main
 
 - [ ] [Google Rich Results Test](https://search.google.com/test/rich-results) — coller l'URL home, vérifier que `LocalBusiness` + `aggregateRating` 4.8/102 sont détectés
 - [ ] [Lighthouse mobile](https://pagespeed.web.dev/) — cibles : Performance ≥ 85, Accessibility ≥ 98, Best Practices ≥ 95, SEO ≥ 98
-- [ ] Soumettre `https://atelier-levy.fr/sitemap.xml` dans **Google Search Console**
+- [ ] Soumettre `https://parkeretsmith.com/sitemap.xml` dans **Google Search Console**
 - [ ] Ajouter l'URL du site dans la fiche **Google My Business**
 
 ## TODO CLIENT — à remplir avant mise en ligne
@@ -99,7 +99,7 @@ git push -u origin main
 - [ ] **Vidéo MP4 fallback mobile** du calibre (H.264 720p 30fps < 2 MB, 6s loop) → `public/videos/caliber-mobile-fallback.mp4`. Le hero mobile montre actuellement un placeholder CSS.
 - [ ] **Photo réelle** mains/portrait artisan → remplacer le placeholder Unsplash dans [`components/sections/ArtisanSection.tsx`](components/sections/ArtisanSection.tsx)
 - [ ] **Image Open Graph** 1200×630px → `public/og-image.jpg`
-- [ ] **Logo** atelier (si existant) → remplacer le texte « Atelier R. Levy » dans [`components/Navigation.tsx`](components/Navigation.tsx)
+- [ ] **Logo** atelier (si existant) → remplacer le texte « Parker & Smith » dans [`components/Navigation.tsx`](components/Navigation.tsx)
 
 ### Validation textes
 

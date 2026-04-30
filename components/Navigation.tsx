@@ -28,10 +28,10 @@ export default function Navigation() {
       <nav className="flex items-center justify-between">
         <Link
           href="/"
-          aria-label="Atelier R. Levy — accueil"
+          aria-label="Parker & Smith — accueil"
           className="font-display text-xl text-text leading-none tracking-tight"
         >
-          <span className="text-brass">·</span> Atelier R. Levy
+          <span className="text-brass">·</span> Parker & Smith
         </Link>
 
         <div className="flex items-center gap-8">

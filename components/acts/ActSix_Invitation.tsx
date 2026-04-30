@@ -101,10 +101,10 @@ export default function ActSixInvitation() {
         <div>
           <p className="text-text-dim">Email</p>
           <a
-            href="mailto:contact@atelier-levy.fr"
+            href="mailto:contact@parkeretsmith.com"
             className="mt-2 block text-text hover:text-brass normal-case tracking-normal"
           >
-            contact@atelier-levy.fr
+            contact@parkeretsmith.com
           </a>
         </div>
         <div>

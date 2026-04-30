@@ -119,7 +119,7 @@ export default function ActServices() {
             </span>
             <span className="h-px w-12 bg-brass/40" />
             <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-text-muted">
-              Atelier Levy · Mandelieu
+              Parker &amp; Smith · Mandelieu
             </span>
           </div>
 

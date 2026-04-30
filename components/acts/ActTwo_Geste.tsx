@@ -151,7 +151,7 @@ export default function ActThreeGeste() {
           <span className="text-brass">»</span>
         </blockquote>
         <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.32em] text-text-dim">
-          — Atelier R. Levy
+          — Parker &amp; Smith
         </p>
       </div>
     </section>

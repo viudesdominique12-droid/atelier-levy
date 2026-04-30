@@ -23,11 +23,11 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 })
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://atelier-levy.fr'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://parkeretsmith.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Atelier R. Levy — Horloger à Mandelieu-la-Napoule",
+  title: "Parker & Smith — Horloger à Mandelieu-la-Napoule",
   description:
     "Restauration de montres mécaniques anciennes. Côte d'Azur. 4.8★ sur 102 avis Google.",
   robots: 'index, follow',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_FR',
     url: SITE_URL,
-    siteName: 'Atelier R. Levy',
+    siteName: 'Parker & Smith',
   },
 }
 
