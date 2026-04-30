@@ -4,6 +4,7 @@ import Image from 'next/image'
 import SiteFrame from '@/components/SiteFrame'
 import PageHeader from '@/components/PageHeader'
 import { formatPrice, getJewelry } from '@/lib/watches'
+import { asset } from '@/lib/asset'
 
 export const metadata: Metadata = {
   title: 'Bijoux — Parker & Smith',
@@ -78,7 +79,7 @@ export default function BijouxPage() {
                     <div className="relative aspect-square overflow-hidden rounded-xl bg-surface">
                       {w.mainImage ? (
                         <Image
-                          src={w.mainImage}
+                          src={asset(w.mainImage)}
                           alt={`${w.brand} ${w.model}`}
                           fill
                           sizes="(max-width: 1024px) 90vw, 30vw"

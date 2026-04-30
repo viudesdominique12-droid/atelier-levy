@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/cn'
+import { asset } from '@/lib/asset'
 import type { WatchImage } from '@/lib/watches'
 
 export default function WatchGallery({
@@ -65,7 +66,7 @@ export default function WatchGallery({
           aria-label="Agrandir l'image"
         >
           <Image
-            src={current.src}
+            src={asset(current.src)}
             alt={alt}
             fill
             sizes="(max-width: 1024px) 100vw, 60vw"
@@ -121,7 +122,7 @@ export default function WatchGallery({
                 aria-current={i === active}
               >
                 <Image
-                  src={img.src}
+                  src={asset(img.src)}
                   alt=""
                   fill
                   sizes="120px"
@@ -169,7 +170,7 @@ export default function WatchGallery({
           ) : null}
           <div className="relative h-full w-full p-6 sm:p-12">
             <Image
-              src={current.src}
+              src={asset(current.src)}
               alt={alt}
               fill
               sizes="100vw"

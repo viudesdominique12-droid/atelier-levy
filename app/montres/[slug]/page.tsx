@@ -12,6 +12,7 @@ import {
   getRelatedWatches,
   getWatchBySlug,
 } from '@/lib/watches'
+import { asset } from '@/lib/asset'
 
 export function generateStaticParams() {
   return WATCHES.map((w) => ({ slug: w.slug }))
@@ -203,7 +204,7 @@ export default function WatchDetailPage({
                       <div className="relative aspect-square overflow-hidden rounded-xl bg-surface">
                         {r.mainImage ? (
                           <Image
-                            src={r.mainImage}
+                            src={asset(r.mainImage)}
                             alt={`${r.brand} ${r.model}`}
                             fill
                             sizes="(max-width: 1024px) 50vw, 30vw"

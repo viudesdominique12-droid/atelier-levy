@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatPrice, formatYear, type Watch } from '@/lib/watches'
+import { asset } from '@/lib/asset'
 
 export default function WatchCard({ watch }: { watch: Watch }) {
   const yearLabel = formatYear(watch.year)
@@ -14,7 +15,7 @@ export default function WatchCard({ watch }: { watch: Watch }) {
       <div className="relative aspect-square overflow-hidden rounded-xl bg-surface">
         {watch.mainImage ? (
           <Image
-            src={watch.mainImage}
+            src={asset(watch.mainImage)}
             alt={`${watch.brand} ${watch.model}`}
             fill
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
