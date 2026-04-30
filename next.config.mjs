@@ -4,7 +4,7 @@
 // Il faut donc préfixer toutes les URL d'assets par /<repo>. En dev local
 // le préfixe est vide pour que tout marche directement sur localhost:3002.
 const isProd = process.env.NODE_ENV === 'production'
-const repoName = 'atelier-levy'
+const repoName = 'parker'
 const basePath = isProd ? `/${repoName}` : ''
 
 const nextConfig = {
@@ -18,7 +18,7 @@ const nextConfig = {
   // URL propres : /chapitre-1/ au lieu de /chapitre-1
   trailingSlash: true,
   // Expose le basePath au runtime côté client (utilisé par WatchBackground
-  // pour construire le chemin des frames /atelier-levy/watch-frames/...).
+  // pour construire le chemin des frames /parker/watch-frames/...).
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },

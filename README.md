@@ -31,21 +31,21 @@ npm run start
 
 ### 1. Créer un repo GitHub
 
-Depuis le dossier `atelier-levy/` :
+Depuis le dossier `parker/` :
 
 ```bash
 git init
 git add .
 git commit -m "Initial commit — Site Atelier R. Levy"
 git branch -M main
-git remote add origin https://github.com/[USERNAME]/atelier-levy.git
+git remote add origin https://github.com/[USERNAME]/parker.git
 git push -u origin main
 ```
 
 ### 2. Déployer sur Vercel
 
 1. Aller sur [vercel.com](https://vercel.com) → **New Project**
-2. Importer le repo GitHub `atelier-levy`
+2. Importer le repo GitHub `parker`
 3. Framework Preset : **Next.js** (auto-détecté)
 4. Build Command : `next build` (par défaut)
 5. **Variables d'environnement** à ajouter :
