@@ -3,20 +3,29 @@
 /**
  * Acte II — L'examen.
  * Filmstrip horizontal scrub : carton d'intro puis 5 points d'authentification,
- * chacun illustré par un dessin SVG. Reformulé pour le métier d'expert
- * Parker & Smith — pas un atelier de restauration, mais un œil qui authentifie.
+ * chacun illustré par une vraie photo macro tirée du catalogue Parker & Smith.
+ * Le visuel devient cohérent avec le label (boîtier → photo de boîtier, etc.)
+ * et reste dans la palette nuit / laiton du reste du site.
  */
 
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { asset } from '@/lib/asset'
 
 type Piece = {
   num: string
   name: string
   fr: string
   poem: string
-  draw: ReactNode
+  image: string
+  // Origine de la photo — affiché en micro-crédit, renforce le message
+  // « ce qu'on vous montre, c'est ce que vous pouvez réellement acheter ».
+  credit: string
+  // focal point pour object-position : aligne le sujet (boîtier, dial,
+  // couronne, papier...) au centre du cadre malgré le crop.
+  focal: string
 }
 
 const PIECES: Piece[] = [
@@ -25,78 +34,45 @@ const PIECES: Piece[] = [
     name: 'BOÎTIER',
     fr: 'Le boîtier',
     poem: 'Numéro de série, finitions, gravures — la première lecture.',
-    draw: (
-      <svg viewBox="0 0 100 100" fill="none" stroke="#C9A55B" strokeWidth="0.6">
-        <circle cx="50" cy="50" r="22" />
-        <circle cx="50" cy="50" r="3" fill="#C9A55B" />
-        {Array.from({ length: 12 }).map((_, i) => {
-          const a = (i / 12) * Math.PI * 2
-          const x1 = 50 + Math.cos(a) * 22
-          const y1 = 50 + Math.sin(a) * 22
-          const x2 = 50 + Math.cos(a) * 30
-          const y2 = 50 + Math.sin(a) * 30
-          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />
-        })}
-      </svg>
-    ),
+    image: '/home/exam/01-boitier.jpg',
+    credit: 'Hublot Classic Aerofusion 45',
+    focal: '50% 40%',
   },
   {
     num: '02',
     name: 'MOUVEMENT',
     fr: 'Le mouvement',
-    poem: 'On l’ouvre. Le calibre doit correspondre au boîtier.',
-    draw: (
-      <svg viewBox="0 0 100 100" fill="none" stroke="#C9A55B" strokeWidth="0.6">
-        <circle cx="50" cy="50" r="20" />
-        {Array.from({ length: 16 }).map((_, i) => {
-          const a = (i / 16) * Math.PI * 2
-          const x = 50 + Math.cos(a) * 20
-          const y = 50 + Math.sin(a) * 20
-          const x2 = 50 + Math.cos(a + 0.18) * 26
-          const y2 = 50 + Math.sin(a + 0.18) * 26
-          return <line key={i} x1={x} y1={y} x2={x2} y2={y2} strokeWidth="0.8" />
-        })}
-        <circle cx="50" cy="50" r="2" fill="#C9A55B" />
-      </svg>
-    ),
+    poem: "On l'ouvre. Le calibre doit correspondre au boîtier.",
+    image: '/home/exam/02-mouvement.jpg',
+    credit: 'Breguet Tradition 7057',
+    focal: '50% 50%',
   },
   {
     num: '03',
     name: 'AIGUILLES',
     fr: 'Les aiguilles',
-    poem: 'Forme, finition, position. Chaque détail trahit l’âge.',
-    draw: (
-      <svg viewBox="0 0 100 100" fill="none" stroke="#C9A55B" strokeWidth="0.6">
-        <circle cx="50" cy="50" r="32" />
-        <line x1="18" y1="50" x2="82" y2="50" strokeWidth="0.9" />
-        <line x1="50" y1="18" x2="50" y2="82" strokeWidth="0.9" />
-        <circle cx="50" cy="50" r="3.5" fill="#C9A55B" />
-      </svg>
-    ),
+    poem: "Forme, finition, position. Chaque détail trahit l'âge.",
+    image: '/home/exam/03-aiguilles.jpg',
+    credit: 'Cartier Mini Tank',
+    focal: '50% 50%',
   },
   {
     num: '04',
     name: 'PÉRIPHÉRIQUES',
     fr: 'Boucle & couronne',
     poem: 'Boucles, tiges couronne, fermoirs. Souvent les plus parlants.',
-    draw: (
-      <svg viewBox="0 0 100 100" fill="none" stroke="#C9A55B" strokeWidth="0.6">
-        <path d="M 50 50 m -2 0 a 2 2 0 1 1 4 0 a 4 4 0 1 1 -8 0 a 6 6 0 1 1 12 0 a 8 8 0 1 1 -16 0 a 10 10 0 1 1 20 0 a 12 12 0 1 1 -24 0 a 14 14 0 1 1 28 0 a 16 16 0 1 1 -32 0 a 18 18 0 1 1 36 0 a 20 20 0 1 1 -40 0 a 22 22 0 1 1 44 0" />
-      </svg>
-    ),
+    image: '/home/exam/04-couronne.jpg',
+    credit: 'Panerai Luminor Submersible',
+    focal: '50% 60%',
   },
   {
     num: '05',
     name: 'RÉFÉRENCES',
     fr: 'Les numéros',
     poem: 'Référence et numéro de série. Ils datent. Ils prouvent.',
-    draw: (
-      <svg viewBox="0 0 100 100" fill="none">
-        <path d="M50 22 L72 50 L50 78 L28 50 Z" fill="#8B2230" stroke="#C9A55B" strokeWidth="0.5" />
-        <path d="M50 22 L60 36 L72 50 L60 36 Z" fill="#9E2B3A" />
-        <path d="M50 22 L40 36 L28 50 L40 36 Z" fill="#6E1A26" />
-      </svg>
-    ),
+    image: '/home/exam/05-references.jpg',
+    credit: 'Audemars Piguet Royal Oak 39',
+    focal: '60% 50%',
   },
 ]
 
@@ -193,14 +169,69 @@ export default function ActTwoDemontage() {
             key={i}
             className="relative mr-[6vw] flex w-[78vw] shrink-0 flex-col justify-center md:w-[52vw]"
           >
-            {/* Carte sombre avec dessin */}
-            <div className="relative mb-10 flex h-[44vh] w-full max-w-[480px] items-center justify-center rounded-sm border border-brass/15 bg-surface/60 p-12 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
-              <div className="aspect-square w-2/3">{p.draw}</div>
-              <div className="absolute left-6 top-6 font-mono text-[10px] uppercase tracking-[0.32em] text-text-dim">
+            {/* Carte photo : pleine bleed, traitement nuit + voile laiton.
+                - filter: brightness(0.82) saturate(1.05) → atténue les fonds
+                  blancs des photos catalogue, harmonise avec la palette nuit
+                - mix-blend overlay laiton → réintroduit la chaleur du laiton
+                  sans altérer le sujet
+                - vignette radiale → fond se fond dans le décor de la home
+                - liseré laiton + ombre : conserve la signature visuelle
+                  des cartes existantes (savoir-faire, services). */}
+            <div className="group relative mb-10 h-[44vh] w-full max-w-[480px] overflow-hidden rounded-sm border border-brass/20 bg-night shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
+              <Image
+                src={asset(p.image)}
+                alt={p.fr}
+                fill
+                sizes="(max-width: 768px) 78vw, 480px"
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: p.focal,
+                  filter: 'brightness(0.82) saturate(1.05) contrast(1.02)',
+                }}
+                className="transition-transform duration-[2s] ease-out group-hover:scale-[1.03]"
+              />
+
+              {/* Voile laiton très léger : harmonise les blancs du fond marbre */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    'linear-gradient(180deg, rgba(2,3,10,0.25) 0%, rgba(2,3,10,0) 30%, rgba(2,3,10,0) 65%, rgba(2,3,10,0.7) 100%)',
+                  mixBlendMode: 'multiply',
+                }}
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    'radial-gradient(ellipse 130% 90% at 50% 50%, transparent 35%, rgba(2,3,10,0.55) 100%)',
+                }}
+              />
+
+              {/* Liseré laiton intérieur, façon cadre de tableau */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-2 border border-brass/20"
+              />
+
+              {/* Label en haut à gauche — sur fond sombre, lisible */}
+              <div className="absolute left-5 top-5 font-mono text-[10px] uppercase tracking-[0.32em] text-text">
                 {p.name}
               </div>
-              <div className="absolute right-6 bottom-6 font-mono text-[10px] uppercase tracking-[0.32em] text-brass">
+
+              {/* Numéro en haut à droite */}
+              <div className="absolute right-5 top-5 font-mono text-[10px] uppercase tracking-[0.32em] text-brass">
                 {p.num}
+              </div>
+
+              {/* Crédit photo en bas — précise la pièce du catalogue */}
+              <div className="absolute right-5 bottom-5 left-5 flex items-end justify-between gap-4">
+                <span className="font-mono text-[9px] uppercase tracking-[0.28em] text-text-muted">
+                  Réf. {p.credit}
+                </span>
+                <span className="h-px w-10 bg-brass/60" />
               </div>
             </div>
 
