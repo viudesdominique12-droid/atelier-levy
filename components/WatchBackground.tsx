@@ -153,7 +153,7 @@ export default function WatchBackground() {
             className="h-full w-full object-cover transition-opacity duration-700 ease-out"
             style={{
               opacity: ready ? 1 : 0,
-              filter: 'brightness(0.55) saturate(1.05)',
+              filter: 'brightness(0.7) saturate(1.05)',
             }}
             src={VIDEO_PATH_DESKTOP}
             preload="auto"
@@ -166,7 +166,7 @@ export default function WatchBackground() {
         {isMobile === true && (
           <div
             className="ken-burns h-full w-full"
-            style={{ filter: 'brightness(0.55) saturate(1.05)' }}
+            style={{ filter: 'brightness(0.7) saturate(1.05)' }}
           >
             <video
               ref={mobileVideoRef}
