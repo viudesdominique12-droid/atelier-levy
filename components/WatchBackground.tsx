@@ -21,16 +21,20 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-const TOTAL_FRAMES = 484
+// Bundle "Conservateur Apple-like" : 150 frames AVIF qualité 70, max 1600px.
+// Total ~6,8 MB au lieu de 96 MB en JPEG. À perception visuelle équivalente
+// sur tous les écrans (même Pro Retina 16"). 14× plus léger que la version
+// précédente — premier paint quasi instantané, scroll fluide partout.
+const TOTAL_FRAMES = 150
+// Nombre de frames préchargées en priorité haute. Couvre le premier ~15%
+// du scroll, donc la séquence est utilisable dès la fin de leur fetch.
+const HIGH_PRIORITY_FRAMES = 20
 const EASE = 0.1
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 const FRAME_PATH = (i: number) =>
-  `${BASE_PATH}/watch-frames/frame_${String(i).padStart(4, '0')}.jpg`
-// Version desktop : 1928×1072, 40 MB. Réservée au path desktop si jamais
-// utilisée. Pour le path mobile on charge la version 720p ~3,7 MB qui
-// démarre quasi instantanément même sur 4G.
+  `${BASE_PATH}/watch-frames-avif/frame_${String(i).padStart(4, '0')}.avif`
 const VIDEO_PATH_MOBILE = `${BASE_PATH}/watch-mobile.mp4`
-const POSTER_PATH = `${BASE_PATH}/watch-frames/frame_0001.jpg`
+const POSTER_PATH = `${BASE_PATH}/watch-frames-avif/frame_0001.avif`
 
 function detectMobileMode(): boolean {
   if (typeof window === 'undefined') return false
@@ -85,7 +89,11 @@ export default function WatchBackground() {
 
     function resize() {
       if (!canvas || !wrap) return
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      // DPR plafonné à 1.5 — sur un fond animé continu (pas de bords nets
+      // type texte), l'œil ne distingue pas la différence avec DPR 2 ou 3,
+      // mais le GPU travaille 2 à 4× moins. Apple plafonne pareil sur ses
+      // séquences scroll-driven.
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
       const w = wrap.clientWidth
       const h = wrap.clientHeight
       canvas.width = Math.round(w * dpr)
@@ -154,11 +162,30 @@ export default function WatchBackground() {
       rafId = requestAnimationFrame(tick)
     }
 
-    // === Préchargement progressif : frame 0 → squelette 1/15 → reste ===
+    // === Hint navigateur : preload haute priorité des N premières frames ===
+    // Injecte <link rel="preload" fetchpriority="high"> pour que le browser
+    // les fetche en parallèle avec le bundle JS, au lieu d'attendre que
+    // pump() en demande l'image. Gain : la séquence est utilisable ~1s
+    // après le premier paint, au lieu de 3-4s.
+    const preloadLinks: HTMLLinkElement[] = []
+    for (let i = 0; i < HIGH_PRIORITY_FRAMES && i < TOTAL_FRAMES; i++) {
+      const link = document.createElement('link')
+      link.rel = 'preload'
+      link.as = 'image'
+      link.href = FRAME_PATH(i + 1)
+      // Pas tous les browsers respectent fetchpriority mais ceux qui le
+      // font (Chrome, Edge, Safari 17+) traitent ces 20 fetches en HIGH.
+      ;(link as HTMLLinkElement & { fetchPriority?: string }).fetchPriority = 'high'
+      document.head.appendChild(link)
+      preloadLinks.push(link)
+    }
+
+    // === Préchargement progressif : frame 0 → squelette 1/10 → reste ===
+    // 150 frames → 15 frames squelette (espacées de ~10) avant le fill.
     function buildOrder() {
       const order: number[] = [0]
       const seen = new Set<number>([0])
-      for (let i = 15; i < TOTAL_FRAMES; i += 15) {
+      for (let i = 10; i < TOTAL_FRAMES; i += 10) {
         if (!seen.has(i)) {
           order.push(i)
           seen.add(i)
@@ -176,7 +203,8 @@ export default function WatchBackground() {
     const order = buildOrder()
     let inFlight = 0
     let cursor = 0
-    const MAX_PARALLEL = 6
+    // Avec moins de frames et 14× moins de poids, on peut paralléliser plus.
+    const MAX_PARALLEL = 8
 
     function pump() {
       while (inFlight < MAX_PARALLEL && cursor < order.length) {
@@ -185,6 +213,13 @@ export default function WatchBackground() {
         inFlight++
         const img = new Image()
         img.decoding = 'async'
+        // IMPORTANT : on assigne d'abord dans le tableau, puis on déclenche
+        // le load. Avec les <link rel="preload"> ajoutés en amont, l'AVIF
+        // est déjà en cache navigateur. Si on faisait `img.src = ...` avant
+        // `images[idx] = img`, certains browsers (Chromium notamment)
+        // déclenchent `onload` SYNCHRONEMENT sur cache hit — et draw(0)
+        // accéderait alors à un slot encore undefined.
+        images[idx] = img
         img.onload = img.onerror = () => {
           inFlight--
           if (cancelled) return
@@ -196,7 +231,6 @@ export default function WatchBackground() {
           pump()
         }
         img.src = FRAME_PATH(idx + 1)
-        images[idx] = img
       }
     }
 
@@ -215,6 +249,10 @@ export default function WatchBackground() {
       // Détacher les sources pour aider le GC à libérer les buffers
       images.forEach((img) => {
         if (img) img.src = ''
+      })
+      // Retirer les <link rel="preload"> injectés (utile en HMR + SPA)
+      preloadLinks.forEach((link) => {
+        if (link.parentNode) link.parentNode.removeChild(link)
       })
     }
   }, [isMobile])
