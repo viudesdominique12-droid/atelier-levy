@@ -72,28 +72,28 @@ export default function ActServices() {
     if (!section) return
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        defaults: { ease: 'expo.out' },
+        defaults: { ease: 'power2.out' },
         scrollTrigger: {
           trigger: section,
-          start: 'top 70%',
-          toggleActions: 'play none none reverse',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
         },
       })
       tl.from(headingRef.current?.querySelectorAll('[data-word]') ?? [], {
         yPercent: 110,
         opacity: 0,
-        stagger: 0.07,
-        duration: 0.9,
+        stagger: 0.035,
+        duration: 0.45,
       })
         .from(
           servicesRef.current?.children ?? [],
-          { opacity: 0, y: 28, stagger: 0.1, duration: 0.6 },
-          '-=0.4',
+          { opacity: 0, y: 18, stagger: 0.05, duration: 0.35 },
+          '-=0.25',
         )
         .from(
           processRef.current?.children ?? [],
-          { opacity: 0, y: 20, stagger: 0.08, duration: 0.5 },
-          '-=0.3',
+          { opacity: 0, y: 14, stagger: 0.04, duration: 0.3 },
+          '-=0.2',
         )
     }, sectionRef)
     return () => ctx.revert()
@@ -105,7 +105,7 @@ export default function ActServices() {
     <section
       ref={sectionRef}
       // pas de data-act : section informative hors arc narratif
-      className="relative px-[clamp(20px,5vw,80px)] py-[20vh]"
+      className="relative px-[clamp(20px,5vw,80px)] py-[10vh]"
       aria-label="Le savoir-faire"
     >
       <div className="mx-auto max-w-7xl">

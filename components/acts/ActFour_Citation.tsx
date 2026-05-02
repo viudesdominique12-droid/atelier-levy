@@ -25,20 +25,20 @@ export default function ActFourRetour() {
     const section = sectionRef.current
     if (!section) return
     const ctx = gsap.context(() => {
-      // Fondu d'entrée / sortie pour chaque temps, par ScrollTrigger autonome
-      beatRefs.current.forEach((el) => {
+      // Apparition en cascade rapide — toutes les phrases sur le même écran
+      beatRefs.current.forEach((el, i) => {
         if (!el) return
-        gsap.set(el, { opacity: 0, y: 24 })
+        gsap.set(el, { opacity: 0, y: 16 })
         gsap.to(el, {
           opacity: 1,
           y: 0,
-          duration: 1.1,
-          ease: 'expo.out',
+          duration: 0.5,
+          delay: i * 0.22,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 75%',
-            end: 'bottom 35%',
-            toggleActions: 'play reverse play reverse',
+            start: 'top 88%',
+            toggleActions: 'play none none none',
           },
         })
       })
@@ -100,24 +100,23 @@ export default function ActFourRetour() {
         </span>
       </div>
 
-      {/* Trois écrans, un temps par écran. */}
-      {BEATS.map((line, i) => (
-        <div
-          key={i}
-          className="flex h-screen w-full items-center justify-center px-6 text-center"
-        >
+      {/* Une seule scène : les 3 temps empilés. Le pulse laiton et le
+          compteur en bas continuent à donner du rythme. */}
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-6 px-6 py-[18vh] text-center md:gap-10">
+        {BEATS.map((line, i) => (
           <div
+            key={i}
             ref={(el) => {
               beatRefs.current[i] = el
             }}
-            className="text-spotlight will-change-transform px-8 py-6"
+            className="text-spotlight will-change-transform px-6 py-3"
           >
-            <h2 className="font-display text-[clamp(40px,7vw,128px)] font-normal leading-[1] tracking-tightest text-text">
+            <h2 className="font-display text-[clamp(36px,6vw,104px)] font-normal leading-[1.05] tracking-tightest text-text">
               {line}
             </h2>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* Battement laiton + compteur fixés en bas de section */}
       <div className="pointer-events-none absolute inset-x-0 bottom-[10vh] flex flex-col items-center gap-3">

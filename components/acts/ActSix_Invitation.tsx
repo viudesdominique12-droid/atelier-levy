@@ -23,27 +23,27 @@ export default function ActSixInvitation() {
       const words = titleRef.current?.querySelectorAll('[data-word]')
 
       const tl = gsap.timeline({
-        defaults: { ease: 'expo.out' },
+        defaults: { ease: 'power2.out' },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 60%',
-          toggleActions: 'play none none reverse',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
         },
       })
 
       tl.from(words ?? [], {
         yPercent: 110,
         opacity: 0,
-        stagger: 0.07,
-        duration: 1,
+        stagger: 0.04,
+        duration: 0.5,
       })
-        .from(ctaRef.current, { opacity: 0, y: 20, duration: 0.6 }, '-=0.4')
+        .from(ctaRef.current, { opacity: 0, y: 14, duration: 0.35 }, '-=0.25')
         .from(metaRef.current?.children ?? [], {
           opacity: 0,
-          y: 14,
-          stagger: 0.1,
-          duration: 0.5,
-        }, '-=0.4')
+          y: 10,
+          stagger: 0.05,
+          duration: 0.3,
+        }, '-=0.2')
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -55,7 +55,7 @@ export default function ActSixInvitation() {
       id="invitation"
       ref={sectionRef}
       data-act="6"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-[clamp(20px,5vw,80px)] py-[16vh]"
+      className="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-[clamp(20px,5vw,80px)] py-[10vh]"
       aria-label="Acte VI — L'invitation"
     >
       {/* Cadre laiton fin */}

@@ -86,17 +86,22 @@ export default function ActTwoDemontage() {
     const ctx = gsap.context(() => {
       const track = trackRef.current!
       const totalWidth = track.scrollWidth - window.innerWidth
-      const distance = totalWidth + 60
+      // distance = scroll vertical nécessaire pour traverser le filmstrip.
+      // On garde un facteur 0.55 pour que la traversée soit deux fois plus
+      // rapide qu'au format 1:1 — moins de scroll-jacking.
+      const distance = totalWidth * 0.55 + 60
+      // Le track lui-même doit toujours parcourir totalWidth en x.
+      const trackTravel = totalWidth
 
       const trig = ScrollTrigger.create({
         trigger: sectionRef.current!,
         start: 'top top',
         end: () => `+=${distance}`,
-        scrub: 0.5,
+        scrub: 0.3,
         pin: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          gsap.set(track, { x: -distance * self.progress })
+          gsap.set(track, { x: -trackTravel * self.progress })
           if (indexRef.current) {
             const total = PIECES.length + 1 // +1 pour le carton intro
             const cardIdx = Math.min(

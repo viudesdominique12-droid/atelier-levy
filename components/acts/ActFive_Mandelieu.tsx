@@ -27,34 +27,34 @@ export default function ActFiveMandelieu() {
       const titleWords = titleRef.current?.querySelectorAll('[data-word]')
 
       const tl = gsap.timeline({
-        defaults: { ease: 'expo.out' },
+        defaults: { ease: 'power2.out' },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 70%',
-          toggleActions: 'play none none reverse',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
         },
       })
 
-      tl.from(eyebrowRef.current, { opacity: 0, y: 20, duration: 0.6 })
+      tl.from(eyebrowRef.current, { opacity: 0, y: 14, duration: 0.35 })
         .from(
           titleWords ?? [],
-          { yPercent: 110, opacity: 0, stagger: 0.08, duration: 1 },
-          '-=0.2',
+          { yPercent: 110, opacity: 0, stagger: 0.04, duration: 0.5 },
+          '-=0.15',
         )
         .from(
           starsRef.current?.children ?? [],
-          { opacity: 0, scale: 0.4, stagger: 0.08, duration: 0.5, ease: 'back.out(2)' },
-          '-=0.4',
+          { opacity: 0, scale: 0.5, stagger: 0.04, duration: 0.3, ease: 'back.out(2)' },
+          '-=0.25',
         )
         .to({ v: 0 }, {
           v: 24,
-          duration: 1.6,
+          duration: 0.9,
           ease: 'power2.out',
           onUpdate() {
             const v = Math.round((this.targets()[0] as { v: number }).v)
             if (counterRef.current) counterRef.current.textContent = String(v)
           },
-        }, '-=0.6')
+        }, '-=0.4')
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -65,7 +65,7 @@ export default function ActFiveMandelieu() {
     <section
       ref={sectionRef}
       data-act="5"
-      className="relative flex min-h-screen items-center justify-center px-[clamp(20px,5vw,80px)] py-[18vh]"
+      className="relative flex min-h-[80vh] items-center justify-center px-[clamp(20px,5vw,80px)] py-[10vh]"
       aria-label="Acte V — La promesse"
     >
       <div className="text-spotlight px-10 py-14 text-center">

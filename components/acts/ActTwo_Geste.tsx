@@ -32,34 +32,34 @@ export default function ActThreeGeste() {
     if (!sectionRef.current) return
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        defaults: { ease: 'expo.out' },
+        defaults: { ease: 'power2.out' },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 70%',
-          toggleActions: 'play none none reverse',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
         },
       })
 
-      tl.from(tagRef.current, { opacity: 0, x: -20, duration: 0.6 })
+      tl.from(tagRef.current, { opacity: 0, x: -16, duration: 0.4 })
         .from(
           lineRef.current,
-          { scaleX: 0, transformOrigin: 'left center', duration: 1.2 },
-          '-=0.3',
+          { scaleX: 0, transformOrigin: 'left center', duration: 0.6 },
+          '-=0.2',
         )
         .from(
           titleRef.current?.querySelectorAll('[data-word]') ?? [],
-          { yPercent: 110, opacity: 0, stagger: 0.08, duration: 1 },
-          '-=0.7',
-        )
-        .from(
-          verbsRef.current?.querySelectorAll('li') ?? [],
-          { opacity: 0, x: 30, stagger: 0.12, duration: 0.6 },
+          { yPercent: 110, opacity: 0, stagger: 0.04, duration: 0.5 },
           '-=0.4',
         )
         .from(
-          quoteRef.current?.querySelectorAll('[data-word]') ?? [],
-          { yPercent: 110, opacity: 0, stagger: 0.05, duration: 0.9 },
+          verbsRef.current?.querySelectorAll('li') ?? [],
+          { opacity: 0, x: 20, stagger: 0.06, duration: 0.35 },
           '-=0.3',
+        )
+        .from(
+          quoteRef.current?.querySelectorAll('[data-word]') ?? [],
+          { yPercent: 110, opacity: 0, stagger: 0.025, duration: 0.45 },
+          '-=0.2',
         )
     }, sectionRef)
     return () => ctx.revert()
@@ -72,7 +72,7 @@ export default function ActThreeGeste() {
     <section
       ref={sectionRef}
       data-act="3"
-      className="relative px-[clamp(20px,5vw,80px)] py-[24vh]"
+      className="relative px-[clamp(20px,5vw,80px)] py-[12vh]"
       aria-label="Acte III — La signature"
     >
       <div className="text-spotlight mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 py-16 md:grid-cols-12 md:gap-24 md:px-12">
@@ -132,7 +132,7 @@ export default function ActThreeGeste() {
       </div>
 
       {/* Citation centrée plus bas */}
-      <div className="text-spotlight mx-auto mt-[20vh] max-w-4xl px-8 py-10 text-center">
+      <div className="text-spotlight mx-auto mt-[10vh] max-w-4xl px-8 py-10 text-center">
         <blockquote
           ref={quoteRef}
           className="font-display text-[clamp(28px,4vw,64px)] font-normal italic leading-[1.15] tracking-tightest text-text"
