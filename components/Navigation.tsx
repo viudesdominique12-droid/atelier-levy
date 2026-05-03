@@ -6,10 +6,11 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/cn'
 
 const NAV_LINKS = [
-  { href: '/montres', label: 'Montres' },
+  { href: '/montres', label: 'Catalogue' },
+  { href: '/services', label: 'Services' },
+  { href: '/sourcing', label: 'Sourcing' },
+  { href: '/vendre-sa-montre', label: 'Vendre' },
   { href: '/bijoux', label: 'Bijoux' },
-  { href: '/accessoires', label: 'Accessoires' },
-  { href: '/vendre-sa-montre', label: 'Vendre sa montre' },
   { href: '/contact', label: 'Contact' },
 ]
 

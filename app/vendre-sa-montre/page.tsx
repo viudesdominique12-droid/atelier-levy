@@ -45,7 +45,7 @@ export default function VendreSaMontrePage() {
       <PageHeader
         eyebrow="Vendre"
         title="Vendez votre montre en toute sérénité"
-        subtitle="Acquérir une montre de luxe d'occasion n'est pas toujours une chose aisée. La revendre non plus. Parker & Smith vous apporte tout son savoir-faire et son expérience pour que la transaction soit nette, juste et rapide."
+        subtitle="Acquérir une montre de luxe n'est pas toujours une chose aisée. La revendre non plus. Maison horlogère indépendante, Parker & Smith vous apporte savoir-faire et accès à un réseau international d'acheteurs pour que la transaction soit nette, juste et rapide."
       />
 
       <section className="px-[clamp(20px,5vw,80px)]">

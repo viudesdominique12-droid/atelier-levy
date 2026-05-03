@@ -1,25 +1,27 @@
 'use client'
 
 /**
- * Acte V — La promesse.
+ * Acte V — Le réseau international.
  *
- * (Le nom de fichier date de l'ancienne identité du projet — l'arc narratif
- * a été réécrit pour Parker & Smith. Plus de coordonnées Mandelieu : le
- * climax du parcours est désormais la garantie de 2 ans, sans condition.)
+ * (Le nom de fichier date de l'ancienne identité du projet.)
  *
- * Compteur 0 → 24 mois, étoiles laiton qui se dessinent, signature
- * "Garantie d'origine ou garantie 2 années fournie par Parker & Smith".
+ * Compteur 0 → 24 (mois de garantie) ou 0 → N pays. Étoiles laiton qui
+ * se dessinent. Met en avant la dimension internationale : sourcing à
+ * travers maisons, ventes privées et collectionneurs partout dans le
+ * monde.
  */
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+
+const COUNTRIES = ['Paris', 'Genève', 'Zurich', 'Hong Kong', 'Dubaï', 'Singapour', 'New York', 'Tokyo', 'Londres', 'Milan', 'Monaco']
 
 export default function ActFiveMandelieu() {
   const sectionRef = useRef<HTMLElement>(null)
   const eyebrowRef = useRef<HTMLParagraphElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const counterRef = useRef<HTMLSpanElement>(null)
-  const starsRef = useRef<HTMLDivElement>(null)
+  const citiesRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!sectionRef.current) return
@@ -42,12 +44,12 @@ export default function ActFiveMandelieu() {
           '-=0.15',
         )
         .from(
-          starsRef.current?.children ?? [],
-          { opacity: 0, scale: 0.5, stagger: 0.04, duration: 0.3, ease: 'back.out(2)' },
+          citiesRef.current?.children ?? [],
+          { opacity: 0, y: 10, stagger: 0.04, duration: 0.4 },
           '-=0.25',
         )
         .to({ v: 0 }, {
-          v: 24,
+          v: COUNTRIES.length,
           duration: 0.9,
           ease: 'power2.out',
           onUpdate() {
@@ -59,25 +61,25 @@ export default function ActFiveMandelieu() {
     return () => ctx.revert()
   }, [])
 
-  const titleWords = ['Garantie', 'deux', 'ans.']
+  const titleWords = ['International.']
 
   return (
     <section
       ref={sectionRef}
       data-act="5"
       className="relative flex min-h-[80vh] items-center justify-center px-[clamp(20px,5vw,80px)] py-[10vh]"
-      aria-label="Acte V — La promesse"
+      aria-label="Acte V — Le réseau international"
     >
       <div className="text-spotlight px-10 py-14 text-center">
         <span className="block font-mono text-[10px] uppercase tracking-[0.32em] text-brass">
-          Acte V — La promesse
+          Acte V — Le réseau
         </span>
 
         <p
           ref={eyebrowRef}
           className="mt-12 font-mono text-[11px] uppercase tracking-[0.4em] text-text-muted"
         >
-          Sans condition cachée
+          De Paris à Genève, de Hong Kong à Dubaï
         </p>
 
         <h2
@@ -96,32 +98,37 @@ export default function ActFiveMandelieu() {
           ))}
         </h2>
 
-        <div className="mt-16 flex flex-col items-center gap-6">
-          <div ref={starsRef} className="flex gap-2" aria-hidden>
-            {[0, 1, 2, 3, 4].map((i) => (
-              <svg
-                key={i}
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="#D4B677"
-                className="origin-center"
+        <div className="mt-16 flex flex-col items-center gap-8">
+          {/* Liste des villes en mono — comme un carnet d'adresses */}
+          <div
+            ref={citiesRef}
+            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 max-w-3xl"
+          >
+            {COUNTRIES.map((city, i) => (
+              <span
+                key={city}
+                className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.32em] text-text-muted"
               >
-                <path d="M12 2 L14.59 8.41 L21.5 9 L16.25 13.62 L17.77 20.5 L12 16.77 L6.23 20.5 L7.75 13.62 L2.5 9 L9.41 8.41 Z" />
-              </svg>
+                <span className="h-1 w-1 rounded-full bg-brass" />
+                {city}
+                {i === COUNTRIES.length - 1 && (
+                  <span className="ml-3 text-text-dim">…</span>
+                )}
+              </span>
             ))}
           </div>
 
           <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-text-muted">
             <span ref={counterRef} className="text-brass">
-              24
+              {COUNTRIES.length}
             </span>{' '}
-            mois de garantie
+            destinations dans notre réseau
           </p>
 
-          <p className="mt-2 max-w-xl font-display text-lg italic leading-snug text-text-muted md:text-xl">
-            Garantie d&apos;origine ou garantie 2 années fournie par Parker
-            &amp; Smith. Toutes nos pièces, sans exception.
+          <p className="mt-2 max-w-2xl font-display text-lg italic leading-snug text-text-muted md:text-xl">
+            Sourcing à travers maisons horlogères, ventes privées et
+            collectionneurs internationaux. Expéditions sécurisées —
+            en France comme à l&apos;étranger.
           </p>
         </div>
       </div>

@@ -1,13 +1,12 @@
 'use client'
 
 /**
- * Acte II — L'examen.
+ * Acte II — Nos métiers.
  *
- * Disposition : à gauche le carton "L'authentification / On vérifie",
- * à droite un cadrillage de 5 cartes photo (les 5 points d'examen).
- * Plus de filmstrip horizontal scrub : on lit tout d'un coup, comme une
- * planche d'expertise. Animation d'entrée : les cartes apparaissent en
- * cascade depuis la droite quand la section entre dans le viewport.
+ * Cinq services business présentés côte à côte, comme un planche-contact
+ * d'expertise. À gauche le carton "Cinq portes pour le marché horloger",
+ * à droite un cadrillage de 5 cartes photo (les 5 services).
+ * Animation d'entrée : les cartes apparaissent en cascade depuis la droite.
  */
 
 import { useEffect, useRef } from 'react'
@@ -28,48 +27,48 @@ type Piece = {
 const PIECES: Piece[] = [
   {
     num: '01',
-    name: 'BOÎTIER',
-    fr: 'Le boîtier',
-    poem: 'Numéro de série, finitions, gravures — la première lecture.',
-    image: '/home/exam/01-boitier.jpg',
-    credit: 'Hublot Classic Aerofusion 45',
-    focal: '50% 40%',
-  },
-  {
-    num: '02',
-    name: 'MOUVEMENT',
-    fr: 'Le mouvement',
-    poem: "On l'ouvre. Le calibre doit correspondre au boîtier.",
-    image: '/home/exam/02-mouvement.jpg',
-    credit: 'Breguet Tradition 7057',
-    focal: '50% 50%',
-  },
-  {
-    num: '03',
-    name: 'AIGUILLES',
-    fr: 'Les aiguilles',
-    poem: "Forme, finition, position. Chaque détail trahit l'âge.",
-    image: '/home/exam/03-aiguilles.jpg',
-    credit: 'Cartier Mini Tank',
-    focal: '50% 50%',
-  },
-  {
-    num: '04',
-    name: 'PÉRIPHÉRIQUES',
-    fr: 'Boucle & couronne',
-    poem: 'Boucles, tiges couronne, fermoirs. Souvent les plus parlants.',
+    name: 'ACHAT',
+    fr: 'Acheter votre montre',
+    poem: 'Rachat ferme ou dépôt-vente. Estimation sous 48 h.',
     image: '/home/exam/04-couronne.jpg',
     credit: 'Panerai Luminor Submersible',
     focal: '50% 60%',
   },
   {
-    num: '05',
-    name: 'RÉFÉRENCES',
-    fr: 'Les numéros',
-    poem: 'Référence et numéro de série. Ils datent. Ils prouvent.',
+    num: '02',
+    name: 'VENTE',
+    fr: 'Vendre une pièce',
+    poem: 'Sélection internationale neuve, occasion et vintage. Garantie 2 ans.',
+    image: '/home/exam/03-aiguilles.jpg',
+    credit: 'Cartier Mini Tank',
+    focal: '50% 50%',
+  },
+  {
+    num: '03',
+    name: 'SOURCING',
+    fr: 'Trouver la pièce',
+    poem: 'Vous savez ce que vous voulez. On la trouve, on l’authentifie, on vous la livre.',
+    image: '/home/exam/02-mouvement.jpg',
+    credit: 'Breguet Tradition 7057',
+    focal: '50% 50%',
+  },
+  {
+    num: '04',
+    name: 'ESTIMATION',
+    fr: 'Estimer la valeur',
+    poem: 'Photos, papiers, écrin. Retour sous 48 h sur la juste valeur du marché.',
     image: '/home/exam/05-references.jpg',
     credit: 'Audemars Piguet Royal Oak 39',
     focal: '60% 50%',
+  },
+  {
+    num: '05',
+    name: 'CONSEIL',
+    fr: 'Accompagner le choix',
+    poem: 'Première montre, complication, investissement, collection. On dit ce qui dure.',
+    image: '/home/exam/01-boitier.jpg',
+    credit: 'Hublot Classic Aerofusion 45',
+    focal: '50% 40%',
   },
 ]
 
@@ -117,7 +116,7 @@ export default function ActTwoDemontage() {
       ref={sectionRef}
       data-act="2"
       className="relative px-[clamp(20px,5vw,80px)] py-[12vh]"
-      aria-label="Acte II — L'examen"
+      aria-label="Acte II — Nos métiers"
     >
       <div className="mx-auto max-w-7xl">
         {/* Bandeau de tag — comme les autres actes */}
@@ -127,7 +126,7 @@ export default function ActTwoDemontage() {
           </span>
           <span className="h-px w-12 bg-brass/40" />
           <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-text-muted">
-            L&apos;examen
+            Nos métiers
           </span>
         </div>
 
@@ -138,18 +137,18 @@ export default function ActTwoDemontage() {
             className="text-spotlight md:col-span-5 md:sticky md:top-[18vh] md:self-start md:px-6 md:py-8"
           >
             <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-brass">
-              L&apos;authentification
+              Nos métiers
             </p>
             <h2 className="mt-6 font-display text-[clamp(56px,8vw,128px)] font-normal leading-[0.95] tracking-tightest text-text">
-              On vérifie.
+              Cinq portes.
             </h2>
             <p className="mt-8 max-w-md font-display text-xl italic leading-snug text-text-muted md:text-2xl">
-              Cinq points qui ne mentent pas. Le boîtier, son mouvement,
-              la correspondance de l&apos;un avec l&apos;autre, et tous les
-              éléments périphériques.
+              Acheter, vendre, sourcer, estimer, conseiller — cinq façons
+              d&apos;entrer dans le marché horloger de luxe avec un
+              interlocuteur indépendant.
             </p>
             <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.32em] text-text-dim">
-              5 / 5 — chacun authentifié
+              Maison indépendante — ni agent, ni concessionnaire
             </p>
           </div>
 

@@ -12,8 +12,9 @@ const COLUMNS = [
   {
     title: 'Services',
     links: [
-      { href: '/vendre-sa-montre', label: 'Vendre sa montre' },
-      { href: '/contact', label: 'Demander un conseil' },
+      { href: '/services', label: 'Nos métiers' },
+      { href: '/sourcing', label: 'Recherche personnalisée' },
+      { href: '/vendre-sa-montre', label: 'Faire estimer ma montre' },
     ],
   },
   {
@@ -35,8 +36,8 @@ export default function Footer() {
               <span className="text-brass">·</span> Parker &amp; Smith
             </p>
             <p className="mt-4 font-body text-sm leading-relaxed text-text-muted">
-              Expertise et conseil en montres et bijoux de luxe. Spécialistes
-              du marché de la montre d&apos;occasion.
+              Maison horlogère indépendante. Neuf, occasion, vintage —
+              à l&apos;international.
             </p>
           </div>
 

@@ -1,18 +1,18 @@
 'use client'
 
 /**
- * Acte IV — Le verdict. Climax de l'arc narratif.
+ * Acte IV — La confiance. Climax du récit business.
  *
- * Trois temps : Tic. → Tac. → Authentique. Le point laiton pulse de plus
- * en plus vite à mesure que l'utilisateur descend dans la section. Compteur
- * de battements depuis le début de l'examen.
+ * Trois temps : Authentique. → Garantie deux ans. → Acheter en confiance,
+ * vendre en sérénité. Le point laiton pulse en continu — la cadence du
+ * marché qu'on orchestre.
  */
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const BEATS = ['Tic.', 'Tac.', 'Authentique.']
+const BEATS = ['Authentique.', 'Garantie deux ans.', 'Acheter en confiance, vendre en sérénité.']
 
 export default function ActFourRetour() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -91,12 +91,12 @@ export default function ActFourRetour() {
       ref={sectionRef}
       data-act="4"
       className="relative"
-      aria-label="Acte IV — Le verdict"
+      aria-label="Acte IV — La confiance"
     >
       {/* Étiquette verticale du chapitre */}
       <div className="pointer-events-none absolute left-[clamp(20px,5vw,80px)] top-[20vh] -rotate-90 origin-top-left">
         <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-text-dim whitespace-nowrap">
-          Acte IV — Le verdict
+          Acte IV — La confiance
         </span>
       </div>
 
@@ -130,7 +130,7 @@ export default function ActFourRetour() {
           <span ref={counterRef} className="text-brass">
             0
           </span>{' '}
-          battements vérifiés
+          battements depuis le début du récit
         </p>
       </div>
     </section>

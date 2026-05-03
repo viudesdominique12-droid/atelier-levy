@@ -12,12 +12,12 @@ import { cn } from '@/lib/cn'
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI']
 const LABELS = [
-  "L'arrivée",
-  "L'examen",
-  'La signature',
-  'Le verdict',
-  'La promesse',
-  "L'invitation",
+  'La maison',
+  'Nos métiers',
+  "L'authentification",
+  'La confiance',
+  'Le réseau',
+  'Trois portes',
 ]
 
 export default function ChapterIndex() {

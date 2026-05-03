@@ -1,24 +1,25 @@
 'use client'
 
 /**
- * Acte III — La signature.
+ * Acte III — L'authentification.
  * Asymétrique. Titre serif géant + liste verbale stagger + citation centrale
- * + signature. La séquence d'authentification dans la voix de Parker & Smith.
+ * + signature. C'est le différenciant qui justifie tous les services :
+ * une pièce qui passe par nos mains a été authentifiée, point.
  */
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 const VERBS = [
-  'Confronter.',
-  'Tracer.',
-  'Dater.',
-  'Authentifier.',
-  'Certifier.',
-  'Garantir.',
+  'Boîtier.',
+  'Mouvement.',
+  'Aiguilles.',
+  'Périphériques.',
+  'Références.',
+  'Et seulement après — le prix.',
 ]
 
-const QUOTE = 'Les références et les numéros de série ne mentent jamais.'
+const QUOTE = 'Une montre certifiée Parker & Smith a déjà été vérifiée cinq fois.'
 
 export default function ActThreeGeste() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -65,7 +66,7 @@ export default function ActThreeGeste() {
     return () => ctx.revert()
   }, [])
 
-  const titleWords = ['La', 'signature', 'tient', 'aux', 'numéros.']
+  const titleWords = ['Cinq', 'points', 'avant', 'le', 'prix.']
   const quoteWords = QUOTE.split(' ')
 
   return (
@@ -73,7 +74,7 @@ export default function ActThreeGeste() {
       ref={sectionRef}
       data-act="3"
       className="relative px-[clamp(20px,5vw,80px)] py-[12vh]"
-      aria-label="Acte III — La signature"
+      aria-label="Acte III — L'authentification"
     >
       <div className="text-spotlight mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 py-16 md:grid-cols-12 md:gap-24 md:px-12">
         {/* Colonne gauche : tag + titre */}
@@ -84,7 +85,7 @@ export default function ActThreeGeste() {
             </span>
             <span className="h-px w-12 bg-brass/40" />
             <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-text-muted">
-              La signature
+              L&apos;authentification
             </span>
           </div>
 
@@ -113,7 +114,7 @@ export default function ActThreeGeste() {
         {/* Colonne droite : verbes du geste */}
         <div className="md:col-span-5 md:pt-40">
           <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-text-muted">
-            La séquence
+            La grille d&apos;expertise
           </p>
           <ul
             ref={verbsRef}

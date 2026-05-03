@@ -5,9 +5,9 @@ import WatchCard from '@/components/WatchCard'
 import { getWatchesOnly } from '@/lib/watches'
 
 export const metadata: Metadata = {
-  title: 'Montres — Parker & Smith',
+  title: 'Catalogue — Parker & Smith',
   description:
-    "Sélection de montres de luxe d'occasion, contemporaines et vintages d'exception. Authentifiées, certifiées et garanties 2 ans.",
+    "Sélection internationale de montres de luxe — neuf, occasion, vintage. Authentifiées, certifiées et garanties 2 ans.",
 }
 
 const BRAND_ORDER = [
@@ -34,8 +34,8 @@ export default function MontresPage() {
     <SiteFrame>
       <PageHeader
         eyebrow="Catalogue"
-        title="Montres occasions contemporaines et vintages d'exception"
-        subtitle="Toutes nos montres sont authentifiées, certifiées et garanties 2 ans par notre atelier horloger intégré ou après être passées dans les ateliers des marques."
+        title="Sélection internationale — neuf, occasion, vintage"
+        subtitle="Toutes nos pièces sont authentifiées, certifiées et garanties 2 ans par notre atelier horloger intégré ou après être passées dans les ateliers des marques. Expéditions sécurisées en France comme à l'étranger."
       />
 
       <section className="px-[clamp(20px,5vw,80px)]">

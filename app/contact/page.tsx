@@ -55,11 +55,10 @@ export default function ContactPage() {
                 Acheter en confiance, vendre en sérénité
               </h2>
               <p className="mt-6 font-body text-base leading-relaxed text-text-muted">
-                Parker &amp; Smith n&apos;est ni agent, ni représentant, ni
-                concessionnaire officiel des marques proposées. Notre métier,
-                c&apos;est l&apos;expertise et le conseil en montres et bijoux
-                de luxe — au service de chaque pièce qui nous passe entre les
-                mains.
+                Parker &amp; Smith est une maison horlogère indépendante :
+                ni agent, ni concessionnaire officiel. Nous opérons sur le
+                neuf, l&apos;occasion et le vintage — à l&apos;international.
+                Notre seul engagement : la pièce, et vous.
               </p>
             </div>
             <div className="border-l border-brass/20 pl-8">

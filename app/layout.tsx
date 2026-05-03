@@ -27,9 +27,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://parkeretsmith.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Parker & Smith — Expertise et conseil en montres de luxe",
+  title: "Parker & Smith — Maison horlogère indépendante",
   description:
-    "Spécialistes du marché de la montre d'occasion. Authentification, certification et garantie 2 ans sur chaque pièce. Montres contemporaines, vintages d'exception et bijoux signés.",
+    "Maison horlogère indépendante. Neuf, occasion, vintage — sélection internationale. Achat, vente, sourcing personnalisé, estimation, conseil. Garantie 2 ans sur toutes nos pièces.",
   robots: 'index, follow',
   alternates: { canonical: '/' },
   openGraph: {

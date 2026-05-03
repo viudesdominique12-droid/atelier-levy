@@ -17,47 +17,42 @@ const SERVICES = [
   {
     num: '01',
     name: 'Authentification',
-    body: "Vérification du boîtier, du mouvement et de leur correspondance. Contrôle des éléments périphériques : aiguilles, boucles, tiges couronne. Croisement des références et numéros de série.",
+    body: "Boîtier, mouvement, correspondance, périphériques, références. Cinq vérifications systématiques avant qu'une pièce porte notre nom.",
   },
   {
     num: '02',
-    name: 'Garantie 2 ans',
-    body: "Toutes nos montres bénéficient d'une garantie d'origine ou d'une garantie de 2 années fournie par Parker & Smith. Sans condition cachée.",
-  },
-  {
-    num: '03',
     name: 'Atelier intégré',
     body: "Bon fonctionnement contrôlé par notre atelier horloger interne, ou retour dans les ateliers des marques. Aucune pièce ne quitte la maison sans cette étape.",
   },
   {
-    num: '04',
-    name: 'Bracelets neufs',
-    body: "Lorsque les bracelets d'origine ne répondent pas à nos critères d'exigence, nous les remplaçons par des modèles neufs. Aucune approximation tolérée.",
+    num: '03',
+    name: 'Garantie 2 ans',
+    body: "Garantie d'origine sur le neuf, garantie 2 ans Parker & Smith sur l'occasion et le vintage. Sans condition cachée.",
   },
 ]
 
 const STEPS = [
   {
     num: '01',
-    title: 'Vous nous présentez la pièce',
-    body: "Vous cherchez à acheter ou à vendre. Photos, papiers, écrin si vous les avez. Plus le dossier est complet, plus la lecture est précise.",
+    title: 'Le brief',
+    body: "Acheter, vendre, faire chercher, faire estimer. Vous décrivez ce que vous voulez. On entend.",
   },
   {
     num: '02',
-    title: 'Nous expertisons',
-    body: "Authentification rigoureuse, vérification du fonctionnement, confrontation des numéros. Aucun engagement tant que vous n'avez pas validé.",
+    title: 'L\'expertise',
+    body: "Authentification, retour atelier si besoin, sourcing dans notre réseau international. Aucun engagement tant que vous n'avez pas validé.",
   },
   {
     num: '03',
-    title: 'Vous repartez tranquille',
-    body: 'Garantie 2 ans en main, traçabilité complète, transaction limpide. Acheter en confiance, vendre en sérénité.',
+    title: 'La transaction',
+    body: 'Garantie 2 ans en main, traçabilité complète, expédition sécurisée — y compris à l\'international. Acheter en confiance, vendre en sérénité.',
   },
 ]
 
 const TRUST = [
-  'Aucune marque représentée',
-  'Spécialistes occasion',
-  'Vintage et contemporain',
+  'Maison indépendante',
+  'Neuf, occasion, vintage',
+  'Réseau international',
   'Garantie 2 ans',
 ]
 
@@ -99,7 +94,7 @@ export default function ActServices() {
     return () => ctx.revert()
   }, [])
 
-  const titleWords = ['Ce', 'que', 'nous', 'garantissons.']
+  const titleWords = ['Notre', 'exigence.']
 
   return (
     <section
@@ -138,16 +133,16 @@ export default function ActServices() {
           </h2>
 
           <p className="mt-8 max-w-xl font-display text-xl italic leading-snug text-text-muted md:text-2xl">
-            Parker &amp; Smith n&apos;est ni agent, ni représentant, ni
-            concessionnaire officiel. Notre métier — l&apos;expertise et le
-            conseil en montres et bijoux de luxe.
+            Parker &amp; Smith n&apos;est ni agent, ni concessionnaire
+            officiel. Notre indépendance est notre seul engagement —
+            envers la pièce et envers vous.
           </p>
         </div>
 
         {/* Grille des 4 services */}
         <div
           ref={servicesRef}
-          className="mt-24 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
+          className="mt-24 grid grid-cols-1 gap-6 md:grid-cols-3"
         >
           {SERVICES.map((s) => (
             <article
@@ -174,7 +169,7 @@ export default function ActServices() {
               Le processus
             </span>
             <p className="mt-6 font-display text-3xl font-normal italic leading-snug text-text md:text-4xl">
-              De la première poignée de main à la pièce qui change de main.
+              Trois étapes pour acheter, vendre, ou faire chercher.
             </p>
           </div>
 
