@@ -12,7 +12,7 @@ import { cn } from '@/lib/cn'
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI']
 const LABELS = [
-  'La maison',
+  'Entre experts',
   'Nos métiers',
   "L'authentification",
   'La confiance',

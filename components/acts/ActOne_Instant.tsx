@@ -1,11 +1,12 @@
 'use client'
 
 /**
- * Acte I — La maison.
+ * Acte I — Entre experts.
  *
- * Ouverture du récit Parker & Smith : pas un atelier, pas un revendeur —
- * une maison horlogère indépendante qui opère sur le neuf, l'occasion et
- * le vintage, à l'international. Trois lignes pour planter le décor.
+ * Ouverture qui s'adresse au visiteur connaisseur — collectionneur, amateur
+ * éclairé, futur acheteur de pièce sérieuse. Pas d'argument de vente, juste
+ * un pacte d'égal à égal. Pose les 3 services majeurs (estimation, sourcing,
+ * authentification) sans les nommer mécaniquement.
  */
 
 import { useEffect, useRef } from 'react'
@@ -13,9 +14,9 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const LINES = [
-  'Une maison horlogère.',
-  'Indépendante.',
-  'Neuf, occasion, vintage. À l’international.',
+  'Vous savez ce que vaut une montre.',
+  'Nous savons où elle se trouve.',
+  "Et comment elle s'authentifie.",
 ]
 
 export default function ActOneSilence() {
@@ -84,12 +85,12 @@ export default function ActOneSilence() {
       ref={sectionRef}
       data-act="1"
       className="relative"
-      aria-label="Acte I — La maison"
+      aria-label="Acte I — Entre experts"
     >
       {/* Étiquette verticale du chapitre, fixée à l'entrée de l'acte */}
       <div className="pointer-events-none absolute left-[clamp(20px,5vw,80px)] top-[20vh] -rotate-90 origin-top-left">
         <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-text-dim whitespace-nowrap">
-          Acte I — La maison
+          Acte I — Entre experts
         </span>
       </div>
 
